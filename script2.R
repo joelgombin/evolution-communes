@@ -28,7 +28,7 @@ row.names(data) <- data$CodeInsee
 save(data, file="data.Rdata")
 
 groupes_depart <- kmeans(data[,113:172], centers=1000, iter.max=50) # on simplifie le dataset de départ pour pouvoir faire une ACP plus aisément dessus. Problème : pas déterministe donc pas réplicable...
-groupes <- cbind(groupes=row.names(groupes_depart$centers), groupes_depart$centers)
+groupes <- data.frame(cbind(groupes=1:1000, groupes_depart$centers))
 
 
 # attention, c'est *long* (près de deux heures sur une instance AWS...)
