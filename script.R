@@ -1,3 +1,9 @@
+#######################################################
+# Ce script permet de répliquer mon travail sur l'évolution socio-démographique des communes françaises depuis 1968 de manière complète. Cependant, certaines étapes demandent beaucoup de temps de calcul (et une machine avec beaucoup de RAM), donc je conseille plutôt de passer directement à la deuxième partie du script - cf. commentaires
+#######################################################
+
+
+
 ## Initialisation
 setwd("/media/Data/Dropbox/Thèse/évolution")  # à modifier en fonction de la config locale...
 data <- read.csv("data.csv", colClasses = c("factor", "character", "character", rep("integer",72)))
@@ -27,14 +33,24 @@ for (i in 1:5) {
 row.names(data) <- data$CodeInsee
 save(data, file="data.Rdata")
 
-groupes_depart <- kmeans(data[,113:172], centers=1000, iter.max=50) # on simplifie le dataset de départ pour pouvoir faire une ACP plus aisément dessus. Problème : pas déterministe donc pas réplicable...
-groupes <- data.frame(cbind(groupes=1:1000, groupes_depart$centers))
 
 
 # attention, c'est *long* (près de deux heures sur une instance AWS...)
 groupes_def2 <- pam(data[,113:172], k=10, )
 save(groupes_def2, file="groupes_def_pam.Rdata")
 # attention, ce n'est pas un algorithme déterministe, donc vous n'obtiendrez pas les mêmes groupes que moi. Beaucoup plus robuste qu'un K-means classique, ceci dit.
+
+
+###########################################################################
+# On peut commencer l'exécution du script ici, en chargeant des fichiers  #
+# de données, à l'aide des commandes suivantes.                           #
+###########################################################################
+
+load("data.Rdata")
+load("groupes_def_pam.Rdata")
+
+groupes_depart <- kmeans(data[,113:172], centers=1000, iter.max=50) # on simplifie le dataset de départ pour pouvoir faire une ACP plus aisément dessus. Problème : pas déterministe donc pas réplicable...
+groupes <- data.frame(cbind(groupes=1:1000, groupes_depart$centers))
 
 groupes2 <- cbind(groupes=1001:1010,as.data.frame(groupes_def2$medoids)) 
 names(groupes)[1] <- "groupes"
