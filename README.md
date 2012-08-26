@@ -7,7 +7,8 @@ Des données et du code pour étudier l'évolution socio-démographique des comm
 
 Infos de session R/Rstudio, pour reproductibilité :
 
-````R version 2.15.1 (2012-06-22)
+```
+R version 2.15.1 (2012-06-22)
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 locale:
@@ -26,4 +27,5 @@ other attached packages:
 loaded via a namespace (and not attached):
  [1] colorspace_1.1-1   dichromat_1.2-4    digest_0.5.2       grid_2.15.1        labeling_0.1      
  [6] MASS_7.3-20        memoise_0.1        munsell_0.3        plyr_1.7.1         proto_0.3-9.2     
-[11] RColorBrewer_1.0-5 reshape2_1.2.1     stringr_0.6.1      tools_2.15.1     ````
+[11] RColorBrewer_1.0-5 reshape2_1.2.1     stringr_0.6.1      tools_2.15.1
+```
